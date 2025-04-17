@@ -9,8 +9,7 @@ A sophisticated e-commerce web application built using **Next.js**. This project
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/your-username/your-repo-name.git
-   cd your-repo-name
+   https://github.com/sridhar-pro/e-com-nextjs.git ./
    ```
 
 2. **Install dependencies:**
