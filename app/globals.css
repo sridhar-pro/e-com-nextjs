@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    scroll-behavior: smooth;
+}
+
+@layer base {
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.input-style {
+  @apply px-2 py-2.5 focus:border-orange-500 transition border border-gray-500/30 rounded outline-none w-full text-gray-500;
+}
+
+.dark {
+  background-color: #000000;
+  color: #ffffff;
+  /* Add other dark mode styles */
+}
+
+.light {
+  background-color: #fff;
+  color: #000;
+  /* Add other light mode styles */
+}
