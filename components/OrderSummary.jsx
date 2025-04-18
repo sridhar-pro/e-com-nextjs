@@ -45,12 +45,12 @@ const OrderSummary = () => {
       openSignIn(); // Open sign-in modal
       return;
     }
-
+  
     if (!selectedAddress) {
       toast.error("Please select an address");
       return;
     }
-
+  
     const orderItems = Object.keys(cartItems).map((itemId) => {
       const product = products.find((p) => p._id === itemId);
       return {
@@ -61,15 +61,20 @@ const OrderSummary = () => {
         quantity: cartItems[itemId],
         total: product.offerPrice * cartItems[itemId],
       };
-    });
-
+    }).filter(item => item.quantity > 0); // 👈 filter out zero-quantity items
+  
+    if (orderItems.length === 0) {
+      toast.error("No items in cart to place an order");
+      return;
+    }
+  
     const order = {
       items: orderItems,
       address: selectedAddress,
       amount: getCartAmount() + Math.floor(getCartAmount() * 0.02),
       date: new Date().toISOString(),
     };
-
+  
     const existingOrders = JSON.parse(localStorage.getItem("my-orders")) || [];
     const updatedOrders = [...existingOrders, order];
     localStorage.setItem("my-orders", JSON.stringify(updatedOrders));
@@ -77,6 +82,7 @@ const OrderSummary = () => {
     toast.success("Order placed successfully!");
     router.push("/my-orders");
   };
+  
 
   useEffect(() => {
     fetchUserAddresses();

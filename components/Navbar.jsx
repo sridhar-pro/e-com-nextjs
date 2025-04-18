@@ -76,7 +76,7 @@ const Navbar = () => {
         </Link>
       </div>
 
-      <div className="md:static fixed top-3 right-3 z-50">
+      <div className="md:static absolute top-3 right-3 z-50">
         <button
           onClick={toggleDarkMode}
           className="flex items-center text-sm font-medium bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-100 px-3 py-1.5 rounded-full transition-colors hover:bg-gray-300 dark:hover:bg-gray-700"
