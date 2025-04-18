@@ -31,6 +31,11 @@ export const AppContextProvider = (props) => {
         name: item.title,
         description: item.description,
         image: [item.image], // Matching product.image[0] structure
+
+        rating: {
+          rate: parseFloat((Math.random() * 2 + 3).toFixed(1)), // 3.0 to 5.0
+          count: Math.floor(Math.random() * 500) + 50, // fake number of reviews
+        },
       }));
 
       setProducts(updatedData);

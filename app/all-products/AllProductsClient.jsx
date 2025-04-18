@@ -14,15 +14,41 @@ const AllProductsClient = () => {
   const search = searchParams.get("search")?.toLowerCase() || "";
   const sort = searchParams.get("sort") || "default";
 
-  const filteredProducts = useMemo(() => {
-    let filtered = [...products];
+//   const filteredProducts = useMemo(() => {
+//     let filtered = [...products];
 
+//     if (search) {
+//       filtered = filtered.filter((p) =>
+//         p.title.toLowerCase().includes(search)
+//       );
+//     }
+
+//     if (sort === "asc") {
+//       filtered.sort((a, b) => a.price - b.price);
+//     } else if (sort === "desc") {
+//       filtered.sort((a, b) => b.price - a.price);
+//     } else if (sort === "rating") {
+//       filtered.sort((a, b) => b.rating?.rate - a.rating?.rate);
+//     }
+
+//     return filtered;
+//   }, [products, search, sort]);
+
+const filteredProducts = useMemo(() => {
+    let filtered = [...products];
+  
+    // Inject random ratings if not present (optional for testing)
+    filtered = filtered.map((product) => ({
+      ...product,
+      rating: product.rating || { rate: Math.random() * 2 + 3 },
+    }));
+  
     if (search) {
       filtered = filtered.filter((p) =>
         p.title.toLowerCase().includes(search)
       );
     }
-
+  
     if (sort === "asc") {
       filtered.sort((a, b) => a.price - b.price);
     } else if (sort === "desc") {
@@ -30,9 +56,10 @@ const AllProductsClient = () => {
     } else if (sort === "rating") {
       filtered.sort((a, b) => b.rating?.rate - a.rating?.rate);
     }
-
+  
     return filtered;
   }, [products, search, sort]);
+  
 
   return (
     <>

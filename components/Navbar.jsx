@@ -12,7 +12,7 @@ const Navbar = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [sortOrder, setSortOrder] = useState("default");
 
-  const { isSeller, router, user } = useAppContext();
+  const { router, user, getCartCount } = useAppContext(); // Get getCartCount from AppContext
   const { openSignIn } = useClerk();
 
   // Handle theme
@@ -60,27 +60,38 @@ const Navbar = () => {
         <span className="text-black dark:text-white">cart</span>
       </span>
 
-      <div className="flex items-center ml-48 gap-4 lg:gap-8 max-md:hidden uppercase dark:text-white">
+      <div className="flex items-center ml-0 gap-4 lg:gap-8 max-md:hidden uppercase dark:text-white">
         <Link href="/" className="hover:text-gray-900 transition">
           Home
         </Link>
         <Link href="/all-products" className="hover:text-gray-900 transition">
           Shop
         </Link>
-        {/* <Link href="/" className="hover:text-gray-900 transition">
-          About Us
-        </Link> */}
-        <Link href="/" className="hover:text-gray-900 transition">
-          Contact
+        <Link href="/cart" className="flex items-center gap-2 hover:text-gray-900 transition">
+          <div className="relative flex items-center gap-1">
+            <CartIcon /> {/* Cart Icon */}
+            {/* Notification Badge */}
+            {getCartCount() > 0 && (
+              <div className="bg-red-600 text-white text-xs font-semibold rounded-full w-4 h-4 flex items-center justify-center absolute -top-3 -right-3">
+                {getCartCount()}
+              </div>
+            )}
+          </div>
+          Cart
+        </Link>
+        <Link href="/my-orders" className="hover:text-gray-900 transition">
+          Order
         </Link>
       </div>
 
-      <button
-        onClick={toggleDarkMode}
-        className="flex items-center ml-60 mr-2 md:ml-12 md:mr-2 text-sm font-medium bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-100 px-3 py-1.5 rounded-full transition-colors"
-      >
-        {darkMode ? <Sun size={22} /> : <Moon size={22} />}
-      </button>
+      <div className="md:static fixed top-3 right-16 z-50">
+        <button
+          onClick={toggleDarkMode}
+          className="flex items-center text-sm font-medium bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-100 px-3 py-1.5 rounded-full transition-colors hover:bg-gray-300 dark:hover:bg-gray-700"
+        >
+          {darkMode ? <Sun size={22} /> : <Moon size={22} />}
+        </button>
+      </div>
 
       <ul className="hidden md:flex items-center gap-4">
         <div className="flex items-center border border-gray-300 rounded-xl px-6 py-2 w-full max-w-sm bg-white dark:bg-gray-900">
@@ -113,7 +124,17 @@ const Navbar = () => {
             <UserButton.MenuItems>
               <UserButton.Action
                 label="Cart"
-                labelIcon={<CartIcon />}
+                labelIcon={
+                  <div className="relative">
+                    <CartIcon /> {/* Cart Icon */}
+                    {/* Notification Badge */}
+                    {getCartCount() > 0 && (
+                      <div className="absolute top-0 right-0 bg-red-600 text-white text-xs font-semibold rounded-full w-5 h-5 flex items-center justify-center">
+                        {getCartCount()}
+                      </div>
+                    )}
+                  </div>
+                }
                 onClick={() => router.push("/cart")}
               />
               <UserButton.Action
@@ -148,11 +169,25 @@ const Navbar = () => {
                 labelIcon={<BoxIcon />}
                 onClick={() => router.push("/all-products")}
               />
-              <UserButton.Action
-                label="Cart"
-                labelIcon={<CartIcon />}
-                onClick={() => router.push("/cart")}
-              />
+            <UserButton.Action
+  label="Cart"
+  labelIcon={
+    <div className="flex items-center gap-1">
+      <div className="relative">
+        <CartIcon /> {/* Cart Icon */}
+        {/* Notification Badge */}
+        {getCartCount() > 0 && (
+          <div className="absolute top-0 right-0 bg-red-600 text-white text-xs font-semibold rounded-full w-2 h-2 flex items-center justify-center">
+            {getCartCount()}
+          </div>
+        )}
+      </div>
+    </div>
+  }
+  onClick={() => router.push("/cart")}
+/>
+
+
               <UserButton.Action
                 label="My Orders"
                 labelIcon={<BagIcon />}

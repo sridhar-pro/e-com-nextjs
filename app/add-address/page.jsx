@@ -25,7 +25,7 @@ const AddAddress = () => {
     const updated = [...existing, address];
 
     localStorage.setItem("user-addresses", JSON.stringify(updated));
-    localStorage.setItem("selected-address", JSON.stringify(address)); // 🔥 auto-select logic here
+    localStorage.setItem("selected-address", JSON.stringify(address)); //  auto-select logic here
 
     router.push("/cart"); // or "/checkout" if that’s where OrderSummary is
   };
