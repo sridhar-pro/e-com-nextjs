@@ -14,8 +14,8 @@ const MyOrders = () => {
   return (
     <>
       <Navbar />
-      <div className="px-6 md:px-16 lg:px-32 pt-14 pb-24 bg-gray-50 min-h-screen">
-        <h2 className="text-3xl font-semibold mb-10 text-gray-800">
+      <div className="px-6 md:px-16 lg:px-32 pt-14 pb-24 min-h-screen">
+        <h2 className="text-3xl font-semibold mb-10 text-gray-800 dark:text-gray-200">
           My <span className="text-orange-600">Orders</span>
         </h2>
 

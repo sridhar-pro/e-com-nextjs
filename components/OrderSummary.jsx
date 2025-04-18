@@ -74,7 +74,7 @@ const OrderSummary = () => {
 
   return (
     <div className="w-full md:w-96 bg-gray-500/5 p-5">
-      <h2 className="text-xl md:text-2xl font-medium text-gray-700">Order Summary</h2>
+      <h2 className="text-xl md:text-2xl font-medium text-gray-700 dark:text-gray-200">Order Summary</h2>
       <hr className="border-gray-500/30 my-5" />
 
       <div className="space-y-6">
@@ -106,7 +106,7 @@ const OrderSummary = () => {
             </button>
 
             {isDropdownOpen && (
-              <ul className="absolute w-full bg-white border shadow-md mt-1 z-10 py-1.5">
+              <ul className="absolute w-full bg-white dark:bg-black border shadow-md mt-1 z-10 py-1.5">
                 {userAddresses.map((address, index) => (
                   <li
                     key={index}

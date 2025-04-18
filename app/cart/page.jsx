@@ -49,7 +49,7 @@ const Cart = () => {
                     <tr key={itemId}>
                       <td className="flex items-center gap-4 py-4 md:px-4 px-1">
                         <div>
-                          <div className="rounded-lg overflow-hidden bg-gray-500/10 p-2">
+                          <div className="rounded-lg overflow-hidden bg-gray-500/10 dark:bg-white p-2">
                             <Image
                               src={product.image[0]}
                               alt={product.name}
@@ -85,7 +85,7 @@ const Cart = () => {
                               className="w-4 h-4"
                             />
                           </button>
-                          <input onChange={e => updateCartQuantity(product._id, Number(e.target.value))} type="number" value={cartItems[itemId]} className="w-8 border text-center appearance-none"></input>
+                          <input onChange={e => updateCartQuantity(product._id, Number(e.target.value))} type="number" value={cartItems[itemId]} className="w-8 border text-center text-black appearance-none"></input>
                           <button onClick={() => addToCart(product._id)}>
                             <Image
                               src={assets.increase_arrow}

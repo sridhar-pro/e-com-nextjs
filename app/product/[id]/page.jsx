@@ -39,7 +39,7 @@ const Product = () => {
       <div className="px-6 md:px-16 lg:px-32 pt-14 space-y-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
           <div className="px-5 lg:px-16 xl:px-20">
-            <div className="rounded-lg overflow-hidden bg-gray-500/10 mb-4">
+            <div className="rounded-lg overflow-hidden bg-gray-500/10 dark:bg-white mb-4">
               <Image
                 src={mainImage || productData.image[0]}
                 alt="alt"
@@ -54,7 +54,7 @@ const Product = () => {
                 <div
                   key={index}
                   onClick={() => setMainImage(image)}
-                  className="cursor-pointer rounded-lg overflow-hidden bg-gray-500/10"
+                  className="cursor-pointer rounded-lg overflow-hidden bg-gray-500/10 dark:bg-white"
                 >
                   <Image
                     src={image}
@@ -69,7 +69,7 @@ const Product = () => {
           </div>
 
           <div className="flex flex-col relative">
-            <h1 className="text-3xl font-medium text-gray-800/90 mb-4">
+            <h1 className="text-3xl font-medium text-gray-800/90 dark:text-white mb-4">
               {productData.name}
             </h1>
             <div className="flex items-center gap-2">

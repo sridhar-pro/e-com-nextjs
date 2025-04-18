@@ -11,8 +11,8 @@ const Footer = () => {
         className="cursor-pointer text-2xl md:text-3xl font-bold hover:text-orange-700 uppercase italic"
         onClick={() => router.push('/')}
       >
-        <span className="text-orange-600">E</span>-
-        <span className="text-black dark:text-white">cart</span>
+        <span className="text-orange-600 mr-0.5">E</span>-
+        <span className="text-black dark:text-white ml-0.5">cart</span>
       </span>
           <p className="mt-6 text-sm">
             Lorem Ipsum is simply dummy text of the printing and typesetting

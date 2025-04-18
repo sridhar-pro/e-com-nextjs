@@ -22,18 +22,10 @@ const Navbar = () => {
       setDarkMode(savedTheme === "dark");
     }
   }, []);
-
-  useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-    }
-  }, [darkMode]);
-
   const toggleDarkMode = () => {
+    const newTheme = darkMode ? "light" : "dark";
+    localStorage.setItem("theme", newTheme);
+    document.documentElement.classList.toggle("dark", newTheme === "dark");
     setDarkMode(!darkMode);
   };
 
@@ -56,8 +48,8 @@ const Navbar = () => {
         className="cursor-pointer text-2xl md:text-3xl font-bold hover:text-orange-700 uppercase italic"
         onClick={() => router.push("/")}
       >
-        <span className="text-orange-600">E</span>-
-        <span className="text-black dark:text-white">cart</span>
+        <span className="text-orange-600 mr-0.5">E</span>-
+        <span className="text-black dark:text-white ml-0.5">cart</span>
       </span>
 
       <div className="flex items-center ml-0 gap-4 lg:gap-8 max-md:hidden uppercase dark:text-white">
@@ -84,7 +76,7 @@ const Navbar = () => {
         </Link>
       </div>
 
-      <div className="md:static fixed top-3 right-16 z-50">
+      <div className="md:static fixed top-3 right-3 z-50">
         <button
           onClick={toggleDarkMode}
           className="flex items-center text-sm font-medium bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-100 px-3 py-1.5 rounded-full transition-colors hover:bg-gray-300 dark:hover:bg-gray-700"
@@ -92,6 +84,7 @@ const Navbar = () => {
           {darkMode ? <Sun size={22} /> : <Moon size={22} />}
         </button>
       </div>
+
 
       <ul className="hidden md:flex items-center gap-4">
         <div className="flex items-center border border-gray-300 rounded-xl px-6 py-2 w-full max-w-sm bg-white dark:bg-gray-900">
@@ -155,7 +148,7 @@ const Navbar = () => {
         )}
       </ul>
 
-      <div className="flex items-center md:hidden gap-3">
+      <div className="flex items-center md:hidden gap-3 pr-10">
         {user ? (
           <UserButton>
             <UserButton.MenuItems>
@@ -170,23 +163,22 @@ const Navbar = () => {
                 onClick={() => router.push("/all-products")}
               />
             <UserButton.Action
-  label="Cart"
-  labelIcon={
-    <div className="flex items-center gap-1">
-      <div className="relative">
-        <CartIcon /> {/* Cart Icon */}
-        {/* Notification Badge */}
-        {getCartCount() > 0 && (
-          <div className="absolute top-0 right-0 bg-red-600 text-white text-xs font-semibold rounded-full w-2 h-2 flex items-center justify-center">
-            {getCartCount()}
-          </div>
-        )}
-      </div>
-    </div>
-  }
-  onClick={() => router.push("/cart")}
-/>
-
+              label="Cart"
+              labelIcon={
+                <div className="flex items-center gap-1">
+                  <div className="relative">
+                    <CartIcon /> {/* Cart Icon */}
+                    {/* Notification Badge */}
+                    {getCartCount() > 0 && (
+                      <div className="absolute top-0 right-0 bg-red-600 text-white text-xs font-semibold rounded-full w-2 h-2 flex items-center justify-center">
+                        {getCartCount()}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              }
+              onClick={() => router.push("/cart")}
+            />
 
               <UserButton.Action
                 label="My Orders"
