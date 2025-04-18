@@ -2,6 +2,7 @@
 import { useAppContext } from "@/context/AppContext";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
+import { useUser, useClerk } from "@clerk/nextjs"; 
 
 const OrderSummary = () => {
   const {
@@ -17,6 +18,9 @@ const OrderSummary = () => {
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [userAddresses, setUserAddresses] = useState([]);
+
+  const { user } = useUser(); 
+  const { openSignIn } = useClerk(); 
 
   const fetchUserAddresses = async () => {
     const saved = JSON.parse(localStorage.getItem("user-addresses")) || [];
@@ -36,6 +40,12 @@ const OrderSummary = () => {
   };
 
   const createOrder = async () => {
+    if (!user) {
+      toast.error("You must be signed in to place an order");
+      openSignIn(); // Open sign-in modal
+      return;
+    }
+
     if (!selectedAddress) {
       toast.error("Please select an address");
       return;
