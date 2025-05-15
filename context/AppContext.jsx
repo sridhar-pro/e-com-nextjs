@@ -15,36 +15,37 @@ export const AppContextProvider = (props) => {
   const { user } = useUser();
 
   const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true); // Add loader state
   const [isSeller, setIsSeller] = useState(true);
   const [cartItems, setCartItems] = useState({});
 
-  // Fetch product data from Fake Store API
   const fetchProductData = async () => {
     try {
+      setIsLoading(true);
       const res = await fetch("https://fakestoreapi.com/products");
       const data = await res.json();
 
       const updatedData = data.map((item) => ({
         ...item,
-        _id: item.id.toString(), // Matching your routing logic
+        _id: item.id.toString(),
         offerPrice: item.price,
         name: item.title,
         description: item.description,
-        image: [item.image], // Matching product.image[0] structure
-
+        image: [item.image],
         rating: {
-          rate: parseFloat((Math.random() * 2 + 3).toFixed(1)), // 3.0 to 5.0
-          count: Math.floor(Math.random() * 500) + 50, // fake number of reviews
+          rate: parseFloat((Math.random() * 2 + 3).toFixed(1)),
+          count: Math.floor(Math.random() * 500) + 50,
         },
       }));
 
       setProducts(updatedData);
     } catch (err) {
       console.error("Error fetching products:", err);
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  // Cart functions
   const addToCart = (itemId) => {
     let cartData = structuredClone(cartItems);
     if (cartData[itemId]) {
@@ -100,6 +101,19 @@ export const AppContextProvider = (props) => {
     getCartAmount,
   };
 
+  // 🛑 Return a fallback while loading
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center h-screen bg-white dark:bg-gray-900">
+        <div className="flex space-x-2">
+          <div className="w-4 h-4 bg-orange-500 rounded-full animate-bounce"></div>
+          <div className="w-4 h-4 ml-2 bg-orange-500 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
+          <div className="w-4 h-4 ml-2 bg-orange-500 rounded-full animate-bounce [animation-delay:-0.6s]"></div>
+        </div>
+      </div>
+    );
+  }
+  
   return (
     <AppContext.Provider value={value}>
       {props.children}
