@@ -4,8 +4,8 @@ import { useAppContext } from "@/context/AppContext";
 
 const HomeProducts = () => {
 
-  const { products, router } = useAppContext()
-
+  const { products, router } = useAppContext();
+  console.log(products);
   return (
     <div className="flex flex-col items-center pt-14">
       <p className="text-2xl font-medium text-left w-full uppercase">Popular products</p>
